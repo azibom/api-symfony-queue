@@ -1,0 +1,26 @@
+framework:
+    cache:
+        default_memcached_provider: 'memcached://localhost:11211'
+        pools:
+            app.cache.reports:
+                adapter: cache.adapter.memcached
+                public: false
+                default_lifetime: 300
+
+                
+    secret: '%env(APP_SECRET)%'
+    #default_locale: en
+    #csrf_protection: true
+    #http_method_override: true
+
+    # Enables session support. Note that the session will ONLY be started if you read or write from it.
+    # Remove or comment this section to explicitly disable session support.
+    session:
+        handler_id: ~
+        cookie_secure: auto
+        cookie_samesite: lax
+
+    #esi: true
+    #fragments: true
+    php_errors:
+        log: true

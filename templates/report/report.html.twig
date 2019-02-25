@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Reports</title>
+    </head>
+    <body>
+        <h1>reports</h1>
+
+
+        <h3>allSmses</h3>
+        <span>Count of all sms that we send</span>
+        <ul>
+                <li><p>{{ allSmses }}</p></li>
+        </ul>
+    <hr>
+
+        <h3>apiUsage</h3>
+        <span>Count of the api calls</span>
+        <ul>
+            {% for item in apiUsage %}
+                <li><p>{{ item.api_url }} : {{ item.count }}</p></li>
+            {% endfor %}
+        </ul>
+    <hr>
+
+        <h3>apiError</h3>
+        <span>Persent of api errors</span>
+        <ul>
+            {% for item in apiError %}
+                <li><p>{{ item.api_url }} : {{ item.error }}%</p></li>
+            {% endfor %}
+        </ul>
+    <hr>
+
+        <h3>tenPhones</h3>
+        <span>Ten phone numbers that we call them more than others</span>
+        <ul>
+            {% for item in tenPhones %}
+                <li><p>{{ item.phone }} : {{ item.count }}</p></li>
+            {% endfor %}
+        </ul>
+    <hr>
+
+    </body>
+</html>

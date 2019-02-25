@@ -1,0 +1,36 @@
+# memcached
+http://www.inanzzz.com/index.php/post/ruhe/symfony-memcached-and-redis-adapter-as-cache-pool
+# queue
+https://hugo-soltys.com/blog/use-rabbitmq-to-send-your-emails-asynchronously-with-symfony
+https://hugo-soltys.com/blog/queue-your-doctrine-insertions-with-rabbitmq-in-your-symfony-application
+https://medium.com/@ahmetmertsevinc/symfony-4-and-rabbitmq-c3fcecc017bf
+# cron job 
+https://github.com/rewieer/TaskSchedulerBundle
+https://github.com/glooby/task-bundle
+https://vitux.com/how-to-schedule-tasks-on-ubuntu-using-crontab/
+# service
+https://symfonycasts.com/screencast/symfony-fundamentals/create-service
+
+# query
+https://symfony.com/doc/current/doctrine.html
+
+
+# commands
+
+// run
+php bin/console server:run
+
+
+// create database
+ composer require symfony/orm-pack
+ composer require symfony/maker-bundle --dev
+ php bin/console doctrine:database:create
+ php bin/console make:entity
+ php bin/console make:migration
+ php bin/console doctrine:migrations:migrate
+
+ // start xampp
+ sudo /opt/lampp/lampp start
+
+// rabbitmq
+ http://localhost:15672/

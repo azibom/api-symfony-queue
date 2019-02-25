@@ -1,0 +1,7 @@
+give_sms_info:
+    path:     /send/{number}/{body}
+    controller: App\Controller\SmsController::send
+
+get_report:
+    path:     /report
+    controller: App\Controller\ReportController::report

@@ -1,0 +1,81 @@
+parameters:
+
+
+services:
+    _defaults:
+        autowire: true      # Automatically injects dependencies in your services.
+        autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+        public: true
+
+
+    App\:
+        resource: '../src/*'
+        exclude: '../src/{DependencyInjection,Entity,Migrations,Tests,Kernel.php}'
+
+    App\Controller\:
+        resource: '../src/Controller'
+        tags: ['controller.service_arguments']
+
+
+    App\Service\:
+        resource: '../src/Service'
+        tags: ['controller.service_arguments']
+
+
+    my.task:
+        class: App\task\Task
+        tags:
+            - { name: ts.task }
+   
+
+    send_service:
+        class: App\Consumer\SendConsumer
+
+    schedule_service:
+        class: App\Consumer\scheduleConsumer
+
+
+    App\Controller\ReportController:
+        arguments:
+            $cachePool: '@app.cache.reports'
+        tags: ['controller.service_arguments']
+ 
+
+old_sound_rabbit_mq:
+    connections:
+        default:
+            host:     'localhost'
+            port:     5672
+            user:     'guest'
+            password: 'guest'
+            vhost:    '/'
+            lazy:     false
+            connection_timeout: 3
+            read_write_timeout: 3
+
+            # requires php-amqplib v2.4.1+ and PHP5.4+
+            keepalive: false
+
+            # requires php-amqplib v2.4.1+
+            heartbeat: 0
+
+
+    producers:
+        send:
+            connection:       default
+            exchange_options: {name: 'send', type: direct}
+
+        schedule:
+            connection:       default
+            exchange_options: {name: 'schedule', type: direct}
+    consumers:
+        send:
+            connection:       default
+            exchange_options: {name: 'send', type: direct}
+            queue_options:    {name: 'send'}
+            callback:         send_service
+        schedule:
+            connection:       default
+            exchange_options: {name: 'schedule', type: direct}
+            queue_options:    {name: 'schedule'}
+            callback:         schedule_service
